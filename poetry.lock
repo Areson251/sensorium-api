@@ -94,20 +94,6 @@ offline = ["drf-spectacular-sidecar"]
 sidecar = ["drf-spectacular-sidecar"]
 
 [[package]]
-name = "drf-spectacular-sidecar"
-version = "2023.10.1"
-description = "Serve self-contained distribution builds of Swagger UI and Redoc with Django"
-optional = false
-python-versions = ">=3.6"
-files = [
-    {file = "drf-spectacular-sidecar-2023.10.1.tar.gz", hash = "sha256:546a83c173589715e530fad211af60cbcda2db54eb9e0935d44251639332af6d"},
-    {file = "drf_spectacular_sidecar-2023.10.1-py3-none-any.whl", hash = "sha256:3d042a6772512f4d238f0385d3430acf5f669f595fd0be2641fe6bbfb4c7b376"},
-]
-
-[package.dependencies]
-Django = ">=2.2"
-
-[[package]]
 name = "inflection"
 version = "0.5.1"
 description = "A port of Ruby on Rails inflector to Python"
@@ -478,5 +464,5 @@ files = [
 
 [metadata]
 lock-version = "2.0"
-python-versions = "^3.9"
-content-hash = "72a04170b0c80b57c8d9d333bfded3d862dd622af956f015f52698cda182ccc2"
+python-versions = "3.9.12"
+content-hash = "1dce865d2427d3e3c5fbd7b0d2ef9c3458f09d5a8b14cdaa752c1818e71c3467"

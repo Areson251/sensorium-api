@@ -6,12 +6,11 @@ authors = ["Areson"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "3.9.12"
 django = "^4.2.7"
 psycopg2-binary = "^2.9.9"
 djangorestframework = "^3.14.0"
 drf-spectacular = "^0.26.5"
-drf-spectacular-sidecar = "^2023.10.1"
 
 
 [build-system]

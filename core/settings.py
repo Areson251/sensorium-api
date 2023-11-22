@@ -8,20 +8,19 @@ SECRET_KEY = "django-insecure-kl!z7^uk87ileuuuv*7s57(&8@0vp24rf=%mbw5&4-e#o_1#az
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0"]
 
 
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
-    "django.contrib.contenttypes",  
+    "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
     "drf_spectacular",
     "drf_spectacular_sidecar",
-    "control",
 ]
 
 MIDDLEWARE = [
