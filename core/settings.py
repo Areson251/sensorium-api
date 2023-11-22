@@ -21,7 +21,10 @@ INSTALLED_APPS = [
     "rest_framework",
     "drf_spectacular",
     "drf_spectacular_sidecar",
+
+    "data",
     "control",
+    "authorization"
 ]
 
 MIDDLEWARE = [
