@@ -4,6 +4,14 @@ from django.contrib.auth.models import User
 from control.models import Devices
 
 
+class Token(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    token = models.CharField(max_length=32)
+
+    class Meta:
+        db_table = "token"
+
+
 class AuthCode(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     add_date = models.DateTimeField(auto_now=True)
