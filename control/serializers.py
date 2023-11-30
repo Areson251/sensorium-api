@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
-
+# ModelSerializer, 
 class DevicesSerializer(serializers.Serializer):
-    user_id: str = serializers.IntegerField()
+    user: int = serializers.IntegerField()  # Посмотреть Serializer Relationships
 
     add_date: str = serializers.DateTimeField()
     update_date: str = serializers.DateTimeField()

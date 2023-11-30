@@ -5,10 +5,9 @@ from authorization.views import *
 
 
 router = routers.SimpleRouter()
-router.register(r'tokens', TokenViewSet)
-router.register(r'authcode', AuthCodeViewSet)
-router.register(r'device_tokens', DeviceTokenViewSet)
+# router.register(r'authcode', AuthCodeViewSet)
+# router.register(r'device_tokens', DeviceTokenViewSet)
 
 urlpatterns = [
-    path("", include(router.urls)),
+    path("device_tokens/", include(router.urls)),
 ]
