@@ -31,8 +31,26 @@ $ mkdir media
 ## Локальный запуск
 Прежде всего необходимо установить [Docker](https://docs.docker.com/engine/install/).
 
+Для сборки контейнеров:
+
+- docker 1 version
+```bash
+$ docker-compose up --build
+```
+
+- docker 2 version
+```bash
+$ docker compose up --build
+```
+
 Для запуска приложения:
 
+- docker 1 version
+```bash
+$ docker-compose up
+```
+
+- docker 2 version
 ```bash
 $ docker compose up
 ```
@@ -40,5 +58,11 @@ $ docker compose up
 Оно будет запущено на [`http://localhost:8000`](http://localhost:8000).
 
 Документация API доступна по следующему адресу: [`http://localhost:8000/api/schema/swagger-ui/`](http://localhost:8000/api/schema/swagger-ui/).
+
+## Удаление образа
+
+```
+docker-compose -f docker-compose.yml down
+```
 
 # sensorium-api

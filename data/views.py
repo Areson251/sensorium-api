@@ -1,8 +1,9 @@
 from base64 import b64decode
 
 from drf_spectacular.utils import extend_schema
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 from core.settings import BASE_DIR
 from data.serializers import CreatePhotoSerializer
@@ -14,6 +15,7 @@ from data.serializers import CreatePhotoSerializer
     description="Сохранение картинок вида base64 локально в папку media.",
 )
 @api_view(["POST"])
+@permission_classes([IsAuthenticated])
 def save_photo(request):
     serializer = CreatePhotoSerializer(data=request.data)
     if not serializer.is_valid():

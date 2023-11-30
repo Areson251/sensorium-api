@@ -13,6 +13,8 @@ djangorestframework = "^3.14.0"
 drf-spectacular = "^0.26.5"
 drf-spectacular-sidecar = "^2023.10.1"
 djoser = "^2.2.2"
+numpy = "^1.26.2"
+opencv-python = "^4.8.1.78"
 
 
 [build-system]
