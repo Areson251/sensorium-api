@@ -3,47 +3,62 @@ import random
 
 from base64 import b64decode
 
+from django.utils import timezone
+from drf_spectacular.utils import extend_schema
 from django.shortcuts import render
+from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.authtoken.models import Token
 
-
+from .permissions import *
 from .serializers import *
 from .models import *
 
+
+@extend_schema(
+    parameters=[AuthCodeSerializer],
+    responses={400: AuthCodeSerializer.errors, 200: None},
+    description="Генерация пароля для регистрации девайса пользователя.",
+)
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def generate_device_password(request):
-    data = request.data
+    user = request.user
+    code = "".join(random.choices(string.ascii_lowercase + string.ascii_uppercase + string.digits, k=10))
+    auth_code = AuthCodes.objects.create(code=code, user=user)
+    return Response({"code": auth_code.code}, status=200)
 
-    token = request.headers["Authorization"].split(" ")[1]
-    user = Token.objects.get(key=token).user_id
-    password = "".join(random.choices(string.ascii_lowercase + string.ascii_uppercase + string.digits, k=10))
-
-    data["user"] = user
-    data["code"] = password
-    data["is_used"] = False
-
-    serializer = AuthCodeSerializer(data=data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response({"code": serializer.data["code"]}, status=201)
-    return Response(serializer.errors, status=400)
-
+@extend_schema(
+    parameters=[AuthCodeSerializer],
+    responses={400: AuthCodeSerializer.errors, 200: None},
+    description="Регистрация девайса пользователя.",
+)
 @api_view(["POST"])
-def set_auth_code(request): 
-    serializer = AuthCodeSerializer(data=request.data)
-    if not serializer.is_valid():
-        return Response(serializer.errors, status=400)
-    return Response(status=200)
+@permission_classes([IsAuthenticated])
+def set_device_token(request): 
+    user = request.user
+    code = request.data["code"]
+    auth_code = AuthCodes.objects.filter(code=code).first()
 
-@api_view(["POST"])
-def set_device_token(request):
-    password = request.data["code"]
-    
-    serializer = DeviceTokenSerializer(data=request.data)
-    if not serializer.is_valid():
-        return Response(serializer.errors, status=400)
-    return Response(status=200)
+    if timezone.now() > auth_code.expiration_date: 
+        return Response({"error": "code waiting time has expired"}, status=status.HTTP_418_IM_A_TEAPOT)
+    if auth_code.is_used: 
+        return Response({"error": "code was already used"}, status=status.HTTP_418_IM_A_TEAPOT)
+
+    auth_code.is_used = True
+    auth_code.save()
+
+    device_token = DeviceTokens.objects.create()
+    device = Devices.objects.create(user=user)
+    device_token.device_id = device.id
+    device_token.save()
+
+    return Response({"device_token": device_token.token}, status=200) 
+
+# @api_view(["POST"])
+# def set_auth_code(request): 
+#     serializer = AuthCodeSerializer(data=request.data)
+#     if not serializer.is_valid():
+#         return Response(serializer.errors, status=400)
+#     return Response(status=200)
