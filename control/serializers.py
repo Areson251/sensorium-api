@@ -1,15 +1,21 @@
 from rest_framework import serializers
 
-# ModelSerializer, 
-class DevicesSerializer(serializers.Serializer):
-    user: int = serializers.IntegerField()  # Посмотреть Serializer Relationships
+from .models import *
 
+
+class DevicesSerializer(serializers.ModelSerializer):
+    user_id: int = serializers.IntegerField()
+    name: str = serializers.CharField(max_length=100)
     add_date: str = serializers.DateTimeField()
     update_date: str = serializers.DateTimeField()
 
+    class Meta:
+        model = Devices
+        fields = ["user_id", "name", "add_date", "update_date"]
 
-class EquipmentSerializer(serializers.Serializer):
-    user_id: str = serializers.IntegerField()
+
+class EquipmentSerializer(serializers.ModelSerializer):
+    user_id: int = serializers.IntegerField()
 
     name: str = serializers.CharField(max_length=100)
     description: str = serializers.CharField()
@@ -17,8 +23,8 @@ class EquipmentSerializer(serializers.Serializer):
     update_date: str = serializers.DateTimeField()
 
 
-class IndicatorsSerializer(serializers.Serializer):
-    equipment: str = serializers.IntegerField()
+class IndicatorsSerializer(serializers.ModelSerializer):
+    equipment_id: int = serializers.IntegerField()
     equipment_type: str = serializers.CharField(max_length=100)
     min_value: str = serializers.CharField(max_length=100)
     max_value: str = serializers.CharField(max_length=100)
@@ -26,9 +32,9 @@ class IndicatorsSerializer(serializers.Serializer):
     update_date: str = serializers.DateTimeField()
 
 
-class IndicatorValuesSerializer(serializers.Serializer):
-    device_id: str = serializers.IntegerField()
+class IndicatorValuesSerializer(serializers.ModelSerializer):
+    device_id: int = serializers.IntegerField()
     indicator: str = serializers.IntegerField()
     value: str = serializers.CharField(max_length=100)
-    add_date : str = serializers.DateTimeField()
+    add_date: str = serializers.DateTimeField()
     image_path: str = serializers.CharField(max_length=100)

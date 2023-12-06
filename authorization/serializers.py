@@ -4,13 +4,7 @@ from .models import *
 
 
 class AuthCodeSerializer(serializers.ModelSerializer):
-    user: int = serializers.IntegerField()
-    token: str = serializers.CharField()
-
-    add_date: str = serializers.DateTimeField()
-    expiration_date: str = serializers.DateTimeField()
-    code: str = serializers.CharField(max_length=10)
-    is_used: str = serializers.BooleanField(default=False)
+    code: str = serializers.CharField(min_length=10, max_length=10)
 
     class Meta:
         model = AuthCodes
@@ -24,3 +18,8 @@ class DeviceTokenSerializer(serializers.ModelSerializer):
     class Meta:
         model = DeviceTokens
         fields = ["token"]
+
+
+class ErrorsSerializer(serializers.Serializer):
+    code: bool = serializers.BooleanField()
+    message: str = serializers.CharField()

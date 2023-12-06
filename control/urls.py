@@ -8,7 +8,7 @@ router = routers.SimpleRouter()
 router.register(r'devices', DevicesViewSet)
 router.register(r'equipment', EquipmentViewSet)
 router.register(r'indicators', IndicatorsViewSet)
-router.register(r'indicator_values', IndicatorValuesViewSet)
+router.register(r'indicator-values', IndicatorValuesViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
