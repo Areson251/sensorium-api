@@ -11,9 +11,8 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from .models import *
-from .permissions import *
-from .serializers import *
+from .models import AuthCodes, Devices, DeviceTokens
+from .serializers import AuthCodeSerializer, ErrorsSerializer
 
 
 @extend_schema(
@@ -35,7 +34,7 @@ def generate_device_password(request):
 
 
 @extend_schema(
-    responses={400: status.HTTP_418_IM_A_TEAPOT, 200: None},
+    responses={status.HTTP_418_IM_A_TEAPOT: "code is invalid", 200: None},
     description="Регистрация девайса пользователя.",
 )
 @api_view(["POST"])
@@ -60,9 +59,8 @@ def set_device_token(request):
     auth_code.save()
 
     device = Devices.objects.create(user=user)
-    device_token = DeviceTokens.objects.create()
+    device_token = DeviceTokens.objects.create(device_id=device.id)
 
-    device_token.device_id = device.id
     device_token.save()
 
     return Response({"device_token": device_token.token}, status=200)

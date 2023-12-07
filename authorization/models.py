@@ -1,20 +1,21 @@
 import binascii
 import os
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 
 from control.models import Devices
 
 
 def day_after():
-    return datetime.utcnow() + timedelta(days=1)
+    return timezone.now() + timedelta(days=1)
 
 
 class AuthCodes(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    add_date = models.DateTimeField(auto_now=True)
+    add_date = models.DateTimeField(auto_now_add=True)
     expiration_date = models.DateTimeField(default=day_after)
     code = models.CharField(max_length=10)
     is_used = models.BooleanField(default=False)
