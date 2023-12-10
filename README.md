@@ -1,4 +1,4 @@
-# Sensorium API
+# :collision: Sensorium API
 Система удаленного мониторинга показаний датчиков давления.
 
 ## Introduction
@@ -13,11 +13,11 @@
 
 ![Пример детекции с помощью Yolov8s](images/detected.jpg)
 
-2) Распознавание показаний реализовано с помощью библиотеки **OpenCV**.
+2) Распознавание показаний реализовано с помощью библиотеки **OpenCV**. Алгоритм работает с помощью преобразований в полярной системе координат
 
 ![Пример распознавания значения датчика](images/gague_line.jpg)
 
-## Разработка API
+## :paw_prints: Разработка API
 
 1. Для локальной разработки необходимо установить [poetry](https://python-poetry.org/):
 
@@ -45,7 +45,7 @@ $ poetry install
 $ mkdir media
 ```
 
-## Локальный запуск
+## :whale: Локальный запуск
 Прежде всего необходимо установить [Docker](https://docs.docker.com/engine/install/).
 
 Для сборки контейнеров:
@@ -76,7 +76,7 @@ $ docker compose up
 
 Документация API доступна по следующему адресу: [`http://localhost:8000/api/schema/swagger-ui/`](http://localhost:8000/api/schema/swagger-ui/).
 
-## Удаление образа
+## :whale: Удаление образа
 
 ```
 $ docker-compose -f docker-compose.yml down
