@@ -39,7 +39,7 @@ class IndicatorValues(models.Model):
     indicator = models.ForeignKey(Indicators, on_delete=models.SET_NULL, null=True)
     value = models.CharField(max_length=100)
     add_date = models.DateTimeField(auto_now_add=True)
-    image_path = models.CharField(max_length=100)
+    image_path = models.CharField(max_length=100, default="NoPath")
 
     class Meta:
         db_table = "indicator_values"

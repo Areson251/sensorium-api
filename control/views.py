@@ -5,7 +5,7 @@ from rest_framework import status, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from .models import Devices, Equipment, Indicators, IndicatorValues, IndicatorValues
+from .models import Devices, Equipment, Indicators, IndicatorValues
 from .serializers import (
     DevicesSerializer,
     EquipmentIdSerializer,
