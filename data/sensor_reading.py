@@ -93,3 +93,6 @@ class SensorReading():
 
         line_image = cv2.rotate(line_image, cv2.ROTATE_180)
         return line_image
+
+
+sensor_tool = SensorReading()

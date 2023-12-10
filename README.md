@@ -1,7 +1,7 @@
 # :collision: Sensorium API
 Система удаленного мониторинга показаний датчиков давления.
 
-## Introduction
+## :bulb: Introduction
 
 Разработанный сервис предоставляет доступ для удаленного мониторинга показаний датчиков давления. 
 
@@ -81,5 +81,3 @@ $ docker compose up
 ```
 $ docker-compose -f docker-compose.yml down
 ```
-
-# sensorium-api

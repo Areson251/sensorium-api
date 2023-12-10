@@ -12,7 +12,7 @@ from rest_framework.permissions import IsAuthenticated
 from core.settings import BASE_DIR
 from data.serializers import CreatePhotoSerializer
 
-from .sensor_reading import SensorReading
+from .sensor_reading import sensor_tool
 from control.models import IndicatorValues
 from control.serializers import (
     IndicatorIdSerializer,
@@ -44,7 +44,6 @@ def save_photo(request):
     # with open(path, "wb") as file:
     #     file.write(content)
 
-    sensor_tool = SensorReading()
     detected_value = sensor_tool.get_results(content)
 
     if not detected_value:
