@@ -45,6 +45,8 @@ $ poetry install
 $ mkdir media
 ```
 
+3. В папке [data](data) необходимо создать папку с названием *weights* и положить туда [веса](https://drive.google.com/file/d/1o9m9R16qnCM38OrCNnzXYRL0CNK6wAy0/view?usp=sharing) обученной модели.
+
 ## :whale: Локальный запуск
 Прежде всего необходимо установить [Docker](https://docs.docker.com/engine/install/).
 
