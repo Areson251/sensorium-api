@@ -14,14 +14,18 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
-    "django.contrib.contenttypes",  
+    "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework.authtoken",
+    "djoser",
     "drf_spectacular",
     "drf_spectacular_sidecar",
+    "data",
     "control",
+    "authorization",
 ]
 
 MIDDLEWARE = [
@@ -94,6 +98,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+        "authorization.backends.DeviceTokenAuthentication",
+    ],
 }
 
 SPECTACULAR_SETTINGS = {

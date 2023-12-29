@@ -1,10 +1,24 @@
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/v1/", include("data.urls")),
+
+    # data
+    path("api/v1/data/", include("data.urls")),
+
+    # control
+    path("api/v1/control/", include("control.urls")),
+
+
+    # user authorization
+    path("api/v1/auth/", include('djoser.urls')),
+    path("api/v1/auth/", include('djoser.urls.authtoken')),
+    
+    path("api/v1/auth/", include("authorization.urls")),
+
     # swagger
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(

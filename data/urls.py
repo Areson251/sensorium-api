@@ -3,5 +3,5 @@ from django.urls import path
 from data import views
 
 urlpatterns = [
-    path("photos/", views.save_photo, name="save-photo"),
+    path("save_photo/", views.save_photo, name="save-photo"),
 ]
