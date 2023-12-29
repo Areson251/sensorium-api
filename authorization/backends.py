@@ -1,4 +1,4 @@
-from rest_framework import authentication, exceptions
+from rest_framework import authentication, exceptions, permissions
 
 from .models import DeviceTokens
 
@@ -23,3 +23,13 @@ class DeviceTokenAuthentication(authentication.BaseAuthentication):
             raise exceptions.AuthenticationFailed("No such device")
 
         return (device.user, None)
+    
+    
+class IsDeviceAuthenticated(permissions.BasePermission):
+    """
+    Allows access only to authenticated devices.
+    """
+
+    def has_permission(self, request, view):
+        return bool(DeviceTokenAuthentication.authenticate(request=request))
+        # return bool(request.user and request.user.is_authenticated)

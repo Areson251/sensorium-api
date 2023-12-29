@@ -1,8 +1,6 @@
 from base64 import b64decode
 import numpy as np
 
-from authorization.backends import DeviceTokenAuthentication
-
 from django.forms.models import model_to_dict
 from drf_spectacular.utils import extend_schema
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
@@ -11,12 +9,13 @@ from rest_framework.permissions import IsAuthenticated
 
 from core.settings import BASE_DIR
 from data.serializers import CreatePhotoSerializer
+from authorization.backends import IsDeviceAuthenticated
 
 from .sensor_reading import sensor_tool
 from control.models import IndicatorValues
 from control.serializers import (
     IndicatorIdSerializer,
-    IndicatorValuesSerializer,
+    IndicatorValuesSerializer,  
 )
 
 
@@ -26,8 +25,7 @@ from control.serializers import (
     description="Сохранение картинок вида base64 локально в папку media и показания датчика в таблицу indicator-values.",
 )
 @api_view(["POST"])
-# @authentication_classes([DeviceTokenAuthentication])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsDeviceAuthenticated])
 def save_photo(request):
     user = request.user
     data = request.data
@@ -40,9 +38,9 @@ def save_photo(request):
     image_path = serializer.data.get("image_path") + serializer.data.get("filename") 
     content = b64decode(serializer.data.get("image"))
 
-    # path = BASE_DIR / "media" / serializer.data.get("filename")
-    # with open(path, "wb") as file:
-    #     file.write(content)
+    path = BASE_DIR / "media" / serializer.data.get("filename")
+    with open(path, "wb") as file:
+        file.write(content)
 
     detected_value = sensor_tool.get_results(content)
 
